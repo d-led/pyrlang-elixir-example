@@ -31,7 +31,7 @@ defmodule Hello do
   # handle incoming messages sent from python
   @impl true
   def handle_info({:hello_from_python, python_pid, python_node, count}, state) do
-    IO.puts("received :hello_from_python ##{count} from pid(#{inspect(python_pid)} @ #{python_node}})}")
+    IO.puts("received :hello_from_python ##{count} from #{inspect(python_pid)} @ #{python_node}")
     {:noreply, state}
   end
 
