@@ -25,7 +25,7 @@ class MyProcess(Process):
         LOG.info("Registering process - 'my_process'")
 
     def handle_one_inbox_message(self, msg):
-        LOG.info("Incoming %s", msg)
+        LOG.info("received %s", msg)
         self.get_node().send_nowait(sender=self.pid_,
                   receiver=(Atom(self.erlang_node), Atom('hello')),
                   message=(Atom('hello_from_python'),self.pid_, self.count))
