@@ -1,13 +1,10 @@
 services:
-  python-pyrlang-1:
+
+  pyrlang: &pyrlang
     platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile.python
-    hostname: pyrlang-1.local
-    environment:
-      - ERLANG_NODE=erl@elixir.local
-      - MY_NODE=py@pyrlang-1.local
 
   elixir:
     platform: linux/amd64
@@ -18,11 +15,15 @@ services:
     environment:
       - PYTHON_NODES=py@pyrlang-1.local,py@pyrlang-2.local
 
+  python-pyrlang-1:
+    <<: *pyrlang
+    hostname: pyrlang-1.local
+    environment:
+      - ERLANG_NODE=erl@elixir.local
+      - MY_NODE=py@pyrlang-1.local
+
   python-pyrlang-2:
-    platform: linux/amd64
-    build:
-      context: .
-      dockerfile: Dockerfile.python
+    <<: *pyrlang
     hostname: pyrlang-2.local
     environment:
       - ERLANG_NODE=erl@elixir.local
