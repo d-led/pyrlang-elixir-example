@@ -8,7 +8,6 @@ services:
     environment:
       - ERLANG_NODE=erl@elixir.local
       - MY_NODE=py@pyrlang.local
-      - START_EPMD=true
 
   elixir:
     platform: linux/amd64
