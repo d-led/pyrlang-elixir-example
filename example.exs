@@ -1,8 +1,10 @@
 defmodule Main do
   def run do
+    IO.puts("started the elixir node")
+
+    # start the named process :hello on this node
     {:ok, _} = Hello.start_link()
 
-    IO.puts("started the elixir node")
     Process.sleep(20_000)
     IO.puts("stopped the elixir node")
   end
@@ -11,6 +13,7 @@ end
 defmodule Hello do
   use GenServer
 
+  # evaluated at script compile time
   @python_node (System.get_env("PYTHON_NODE") || "py@127.0.0.1") |> String.to_atom()
 
   ## API
@@ -18,11 +21,11 @@ defmodule Hello do
 
   ## Callbacks
   @impl true
-  def init(count) do
+  def init(initial_count) do
     IO.puts("PYTHON_NODE=#{@python_node}")
     :erlang.register(:hello, self())
     schedule_tick()
-    {:ok, %{count: count}}
+    {:ok, %{count: initial_count}}
   end
 
   # handle incoming messages sent from python
@@ -32,6 +35,7 @@ defmodule Hello do
     {:noreply, state}
   end
 
+  # handle scheduled tick messages
   @impl true
   def handle_info(:tick, %{count: count} = state) do
     # send a message to python
@@ -41,8 +45,7 @@ defmodule Hello do
   end
 
   defp schedule_tick() do
-    delay = round(1000)
-    Process.send_after(self(), :tick, delay)
+    Process.send_after(self(), :tick, 1000)
   end
 end
 
