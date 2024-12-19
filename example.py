@@ -9,6 +9,7 @@ from pyrlang.node import Node
 from pyrlang.process import Process
 
 LOG = logging.getLogger()
+my_node = os.getenv("MY_NODE", "py@127.0.0.1")
 
 class MyProcess(Process):
     def __init__(self) -> None:
@@ -26,7 +27,7 @@ class MyProcess(Process):
 
         self.get_node().send_nowait(sender=self.pid_,
                   receiver=(Atom(self.erlang_node), Atom('hello')),
-                  message=(Atom('hello_from_python'),self.pid_, self.count))
+                  message=(Atom('hello_from_python'),self.pid_, my_node, self.count))
         
         self.count = self.count + 1
 
@@ -45,7 +46,6 @@ def set_up_logging():
 
 async def main():
     LOG.info("starting the python node")
-    my_node = os.getenv("MY_NODE", "py@127.0.0.1")
     LOG.info(f"MY_NODE={my_node}")
     n = Node(node_name=my_node, cookie="COOKIE")
     set_up_logging()
