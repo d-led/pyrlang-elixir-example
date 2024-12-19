@@ -1,11 +1,11 @@
-services:
-
+x-service-templates:
   pyrlang: &pyrlang
     platform: linux/amd64
     build:
       context: .
       dockerfile: Dockerfile.python
 
+services:
   elixir:
     platform: linux/amd64
     build:
