@@ -27,7 +27,7 @@ defmodule Hello do
 
   # handle incoming messages sent from python
   @impl true
-  def handle_info({:hello_from_python,python_pid, count}, state) do
+  def handle_info({:hello_from_python, python_pid, count}, state) do
     IO.puts("received :hello_from_python ##{count} from pid(#{inspect(python_pid)}})}")
     {:noreply, state}
   end
@@ -35,7 +35,7 @@ defmodule Hello do
   @impl true
   def handle_info(:tick, %{count: count} = state) do
     # send a message to python
-    send({:my_process, @python_node}, {:hello_from_elixir, count})
+    send({:my_process, @python_node}, {:hello_from_elixir, count, self()})
     schedule_tick()
     {:noreply, %{state | count: count + 1}}
   end
