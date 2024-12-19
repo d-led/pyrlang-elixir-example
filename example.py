@@ -12,7 +12,7 @@ LOG = logging.getLogger()
 
 class MyProcess(Process):
     def __init__(self) -> None:
-        self.count = 0
+        self.count = 1
         self.erlang_node = os.getenv("ERLANG_NODE", 'erl@127.0.0.1')
         LOG.info(f"ERLANG_NODE={self.erlang_node}")
 
