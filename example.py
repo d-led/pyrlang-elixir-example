@@ -23,11 +23,18 @@ class MyProcess(Process):
         self.get_node().register_name(self, Atom('my_process'))
 
     def handle_one_inbox_message(self, msg):
-        LOG.info("received %s", msg)
+        response_count = self.count
+
+        if len(msg) == 3:
+            message, count, elixir_pid = msg
+            response_count = count
+            LOG.info(f"received :{message} #{count} from {elixir_pid}")
+        else:
+            LOG.info(f"received {msg}")
 
         self.get_node().send_nowait(sender=self.pid_,
                   receiver=(Atom(self.erlang_node), Atom('hello')),
-                  message=(Atom('hello_from_python'),self.pid_, my_node, self.count))
+                  message=(Atom('hello_from_python'),self.pid_, my_node, response_count))
         
         self.count = self.count + 1
 
