@@ -1,0 +1,12 @@
+FROM elixir:alpine
+
+# WARNING: this is not a production-like Dockerfile. Don't use beyond demos
+
+WORKDIR /app
+
+# EPMD - Erlang Port Mapper Daemon
+EXPOSE 4369
+
+COPY example.exs ./
+
+CMD [ "elixir", "--name", "erl@elixir.local", "--cookie", "COOKIE", "example.exs" ]

@@ -35,5 +35,5 @@ resolved_reference = "bf762693bff43d7ccad15c854aa075f849bd0dbc"
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.13"
-content-hash = "a7b68f8da89b7d19f662e1149ac1358d63a0e7973561d7614c2aeab247451111"
+python-versions = ">3.12"
+content-hash = "055988d04897363f6206182bfcc24c2948e412cb99387d2f7ed36dfa5d18f625"

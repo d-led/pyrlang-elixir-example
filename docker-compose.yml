@@ -1,0 +1,20 @@
+services:
+  python-pyrlang:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    hostname: pyrlang.local
+    environment:
+      - ERLANG_NODE=erl@elixir.local
+      - MY_NODE=py@pyrlang.local
+      - START_EPMD=true
+
+  elixir:
+    platform: linux/amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.elixir
+    hostname: elixir.local
+    environment:
+      - PYTHON_NODE=py@pyrlang.local

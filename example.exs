@@ -11,12 +11,15 @@ end
 defmodule Hello do
   use GenServer
 
+  @python_node (System.get_env("PYTHON_NODE") || "py@127.0.0.1") |> String.to_atom()
+
   ## API
   def start_link(), do: GenServer.start_link(__MODULE__, 1)
 
   ## Callbacks
   @impl true
   def init(count) do
+    IO.puts("PYTHON_NODE=#{@python_node}")
     :erlang.register(:hello, self())
     schedule_tick()
     {:ok, %{count: count}}
@@ -32,7 +35,7 @@ defmodule Hello do
   @impl true
   def handle_info(:tick, %{count: count} = state) do
     # send a message to python
-    send({:my_process, :'py@127.0.0.1'}, {:hello_from_elixir, count})
+    send({:my_process, @python_node}, {:hello_from_elixir, count})
     schedule_tick()
     {:noreply, %{state | count: count + 1}}
   end

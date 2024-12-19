@@ -1,6 +1,13 @@
 # Pyrlang Elixir Example
 
-## Prerequisites
+## Run the Demo in Docker
+
+- `docker compose up --build --force-recreate`
+- observe the output
+
+## Run the Demo With all Dependencies Locally 
+
+### Prerequisites
 
 - a working Python environment (e.g. [virtualenv](https://virtualenv.pypa.io/en/latest/)) is assumed
 - install Rust: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh` vis [rustup](https://rustup.rs/)
@@ -9,7 +16,7 @@
 - install Python dependencies `poetry install`
 - install [Elixir](https://elixir-lang.org/install.html)
 
-## Run the Demo
+### Demo
 
 - in one window: `elixir --name erl@127.0.0.1 --cookie COOKIE example.exs`
 - in another: `python example.py`

@@ -7,9 +7,11 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = "^3.13"
+python = ">3.12"
 pyrlang-term = { git = "https://github.com/Pyrlang/Term.git"}
+
 #pyrlang = { git = "https://github.com/Pyrlang/Pyrlang.git", rev = "a4d7940"}
+# new dependency due to OTP 26+
 pyrlang = { git = "https://github.com/H2OSLabs/Pyrlang", rev = "ca665c6d5286bb29f326621e3fdc36367591dfb3"}
 
 
