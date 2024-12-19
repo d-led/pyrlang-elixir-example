@@ -1,5 +1,10 @@
 # Pyrlang Elixir Example
 
+## Structure
+
+- Elixir node source: [`example.exs`](example.exs)
+- Python node source: [`example.py`](example.py)
+
 ## Run the Demo in Docker
 
 - `docker compose up --build --force-recreate`
