@@ -42,7 +42,8 @@ def set_up_logging():
     logging.basicConfig(
         stream=sys.stdout,
         level=logging.INFO,
-        format="%(asctime)s [%(name)s]: %(message)s",
+        # format="%(asctime)s [%(name)s]: %(message)s", # debug
+        format="%(message)s",
         datefmt="%Y-%m-%dT%H:%M:%S%z"
     )
 
